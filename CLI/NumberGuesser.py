@@ -1,4 +1,4 @@
-#This will be a game where there's two players and a random number generator from 1 to 100. The player that has the closest number wins.
+#First game in the repository
 import random
 
 while True:
