@@ -10,9 +10,16 @@ class MyGame(arcade.Window):
         self.player.set_position(self.width/4, self.height/2)
 
     def on_update(self, delta_time: float):
+        #Guardar pos
+        x, y = self.player.position
+        #Modificar pos
+        x += 1
+        #Devolver pos
+        self.player.set_position(x, y)
         pass
 
     def on_draw(self):
+        arcade.start_render()
         self.coin.draw()
         self.player.draw()
 
