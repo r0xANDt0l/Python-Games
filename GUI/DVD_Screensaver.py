@@ -1,4 +1,3 @@
-from unicodedata import name
 import arcade
 
 class MyGame(arcade.Window):
