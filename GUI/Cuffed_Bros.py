@@ -1,9 +1,11 @@
 import arcade
 from arcade import key
+from math import sqrt
 
 class MyGame(arcade.Window):
     def __init__(self, width = 800, height = 600, windowName = "Ventana") -> None:
         super().__init__(width, height, windowName)
+        # Say variables
         self.coin = arcade.Sprite("Assets/coin.png")
         self.coin.set_position(self.width/2,self.height/2)
 
@@ -24,9 +26,18 @@ class MyGame(arcade.Window):
         x, y = self.player.position
 
         #Change Position
+
+        movX = self.movement["right"] - (self.speed * self.movement["left"])
+        movY = self.movement["up"] - (self.speed * self.movement["down"])
+
+        mod = sqrt(movX * movX + movY * movY) # Check module
+
+        if mod != 0:
+            movX = (movX/mod) * self.speed
+            movY = (movY/mod) * self.speed
         
-        x += ((self.speed * self.movement["right"]) - (self.speed*self.movement["left"])) * delta_time
-        y += ((self.speed * self.movement["up"]) - (self.speed*self.movement["down"])) * delta_time
+        x += ((self.speed * self.movement["right"]) - (self.speed * self.movement["left"])) * delta_time
+        y += ((self.speed * self.movement["up"]) - (self.speed * self.movement["down"])) * delta_time
 
         # Check if it's inbounds
 
@@ -36,7 +47,7 @@ class MyGame(arcade.Window):
         elif x < 0 + self.player.width/2:
             x = 0 + self.player.width/2  # Left side
 
-        elif y > self.height - self.player.height/2:
+        if y > self.height - self.player.height/2:
             y = self.height - self.player.height/2 # Top side
 
         elif y < 0 + self.player.height/2 :
