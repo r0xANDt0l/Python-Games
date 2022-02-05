@@ -1,7 +1,5 @@
-from tabnanny import check
-from turtle import width
 import arcade
-from arcade import check_for_collision, key
+from arcade import key
 
 class MyGame(arcade.Window):
     def __init__(self, width = 800, height = 600, windowName = "Ventana") -> None:
