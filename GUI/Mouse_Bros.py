@@ -11,26 +11,30 @@ class MyGame(arcade.Window):
         self.player = arcade.Sprite("Assets/player.png")
         self.player.set_position(self.width/4, self.height/2)
 
+        self.minTime = MAXINT
+
+        self.resetGame()
+
+    def resetGame(self):
         self.coins = [arcade.Sprite("Assets/coin.png") for i in range(5)]
 
         for coin in self.coins:
-            x = randint(coin.width/2, width - coin.height/2)
-            y = randint(coin.width/2, height - coin.height/2)
+            x = randint(coin.width/2, self.width - coin.height/2)
+            y = randint(coin.width/2, self.height - coin.height/2)
             coin.set_position(x,y)    
 
         self.timer = 0
-        self.minTime = MAXINT
 
 
     def on_update(self, delta_time: float):
         self.timer += delta_time
-        print(self.timer)
         if self.checkCol():
             print("Has acabao illo")
+            if self.timer < self.minTime:
+                self.minTime = self.timer
+            self.resetGame()
 
-        if self.timer < self.minTime:
-            self.minTime = self.timer
-
+            
 
     def checkCol(self) -> bool:
         EraseQ = []
@@ -48,6 +52,9 @@ class MyGame(arcade.Window):
         self.player.draw()
         for i in range(len(self.coins)):
             self.coins[i].draw()
+
+        arcade.draw_text(str(round(self.timer,2)) ,self.width/2,self.height * 0.95, arcade.color.WHITE, anchor_x="center")
+        arcade.draw_text("Min: " + str(round(self.minTime,2)) ,self.width/2,self.height * 0.85, arcade.color.WHITE, anchor_x="center")
 
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
