@@ -11,7 +11,10 @@ class MyGame(arcade.Window):
         self.player.set_position(self.width/4, self.height/2)
 
         self.speed = 200
-        self.gravity = self.player.height * -5.5
+        self.gravity = -0.5
+        self.velX = 0
+        self.velY = 0
+
         self.movement = {
             "jump" :  False,
             "left" : False,
@@ -25,17 +28,12 @@ class MyGame(arcade.Window):
 
         #Change Position
 
-        movX = self.movement["right"] - (self.speed * self.movement["left"])
-        movY = 0
+        self.velX = self.speed * (self.movement["right"] - self.movement["left"])
+        self.velY += self.gravity
 
-        mod = sqrt(movX * movX + movY * movY) # Check module
-
-        if mod != 0:
-            movX = (movX/mod) * self.speed
-            movY = (movY/mod) * self.speed
-        
-        x += movX * delta_time
-        y += movY * delta_time
+    
+        x += self.velX * delta_time
+        y += self.velY
 
         # Check if it's inbounds
 
