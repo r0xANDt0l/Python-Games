@@ -76,7 +76,7 @@ class MyGame(arcade.Window):
             self.movement["up"] = True
         elif symbol == key.A:
             self.movement["left"] = True
-        elif symbol == key.S:
+        if symbol == key.S:
             self.movement["down"] = True
         elif symbol == key.D:
             self.movement["right"] = True
@@ -86,7 +86,7 @@ class MyGame(arcade.Window):
             self.movement["up"] = False
         elif symbol == key.A:
             self.movement["left"] = False
-        elif symbol == key.S:
+        if symbol == key.S:
             self.movement["down"] = False
         elif symbol == key.D:
             self.movement["right"] = False
