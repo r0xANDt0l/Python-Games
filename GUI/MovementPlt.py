@@ -10,15 +10,18 @@ class MyGame(arcade.Window):
         self.player = arcade.Sprite("Assets/player.png")
         self.player.set_position(self.width/4, self.height/2)
 
-        self.speed = 200
+        self.speed = 500
         self.gravity = -0.5
+
         self.velX = 0
         self.velY = 0
+        self.jumpForce = 13
 
         self.movement = {
             "jump" :  False,
             "left" : False,
-            "right" : False
+            "right" : False,
+            "onFloor" : False
         }
 
     def on_update(self, delta_time: float):
@@ -29,11 +32,20 @@ class MyGame(arcade.Window):
         #Change Position
 
         self.velX = self.speed * (self.movement["right"] - self.movement["left"])
+
+        if self.movement["jump"] and self.movement["onFloor"]:
+            self.velY = self.jumpForce
+            self.movement["onFloor"] = False
+
+        
+
         self.velY += self.gravity
 
     
         x += self.velX * delta_time
         y += self.velY
+
+        print(self.velY)
 
         # Check if it's inbounds
 
@@ -47,6 +59,7 @@ class MyGame(arcade.Window):
             y = self.height - self.player.height/2 # Top side
 
         elif y < 0 + self.player.height/2 :
+            self.movement["onFloor"] = True
             y = 0 + self.player.height/2 # Bottom side
 
         #Return Position
