@@ -12,7 +12,8 @@ class bomberLuigi(arcade.Window):
         self.player = arcade.Sprite("Assets/player.png")
         self.player.set_position(self.width/2, self.height/2)
 
-        self.bomb = arcade.Sprite("Assets/")
+        self.ammo = 20
+        self.bombs = [arcade.Sprite("Assets/bomb.png") for i in range(self.ammo)]
 
         self.camPos = [0 , 0]
 
@@ -33,6 +34,13 @@ class bomberLuigi(arcade.Window):
         self.xRange = self.width / self.pixelRatio
         self.coinsPos = [(uniform(self.xRange/2 + 1, self.xRange * 2)  , uniform(-self.yRange/2, self.yRange)) for i in range(self.coinAmt)]
 
+    def plant(self):
+        if self.ammo > 0:
+            self.ammo -= 1
+            for i in range(self.ammo):
+                self.bombs[i].set_position(self.player.position[0], self.player.position[1])
+                self.bombs[i].draw
+        print("You've got ", self.ammo, " ammo left")
 
     def on_update(self, delta_time: float):
         #Save Position
@@ -64,10 +72,12 @@ class bomberLuigi(arcade.Window):
 
     def checkCol(self):
         for i in range(self.coinAmt):
-            if self.player.collides_with_sprite(self.coins[i]):
-                pos = (self.camPos[0] + uniform(self.xRange/2 + 1, self.xRange * 2),
-                       uniform(-self.yRange/2, self.yRange))
-                self.coinsPos[i] = pos    
+            for o in range(self.ammo):
+                if self.bombs[o].collides_with_sprite(self.coins[i]):
+                    pos = (self.camPos[0] + uniform(self.xRange/2 + 1, self.xRange * 2),
+                        uniform(-self.yRange/2, self.yRange))
+                    
+                    self.coinsPos[i] = pos    
                  
     def on_draw(self):
         arcade.start_render()
@@ -79,10 +89,15 @@ class bomberLuigi(arcade.Window):
         self.player.draw()
         
 
-    
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.W or symbol == key.SPACE:
             self.jump = True
+        if symbol == key.R:
+            self.ammo = 20
+            print("You've got ", self.ammo, " ammo left")
+        if symbol == key.E:
+            self.plant()
+            
 
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol == key.W or symbol == key.SPACE:
