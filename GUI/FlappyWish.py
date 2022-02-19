@@ -2,7 +2,7 @@ import arcade
 from arcade import key
 from random import uniform
 
-class MyGame(arcade.Window):
+class FlappyLuigi(arcade.Window):
     def __init__(self, width = 800, height = 600, windowName = "Ventana") -> None:
         super().__init__(width, height, windowName)
         # declare variables
@@ -56,7 +56,15 @@ class MyGame(arcade.Window):
 
         self.camPos[0] += self.speed * delta_time
         self.player.set_position(self.width/2, y)
-        
+        self.checkCol()
+
+    def checkCol(self):
+        for i in range(self.coinAmt):
+            if self.player.collides_with_sprite(self.coins[i]):
+                pos = (self.camPos[0] + uniform(self.xRange/2 + 1, self.xRange * 2),
+                       uniform(-self.yRange/2, self.yRange))
+                self.coinsPos[i] = pos    
+                 
     def on_draw(self):
         arcade.start_render()
         for i in range(self.coinAmt):
@@ -76,6 +84,6 @@ class MyGame(arcade.Window):
         if symbol == key.W or symbol == key.SPACE:
             self.jump = False
 
-MyGame()
+FlappyLuigi()
 
 arcade.run()
