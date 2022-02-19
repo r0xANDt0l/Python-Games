@@ -8,63 +8,43 @@ class MyGame(arcade.Window):
         # declare variables
 
         self.player = arcade.Sprite("Assets/player.png")
-        self.player.set_position(self.width/4, self.height/2)
+        self.player.set_position(self.width/2, self.height/2)
 
         self.speed = 500
         self.gravity = -0.5
 
         self.velX = 0
         self.velY = 0
-        self.jumpForce = 13
+        self.jumpForce = 10
 
-        self.movement = {
-            "jump" :  False,
-            "left" : False,
-            "right" : False,
-            "onFloor" : False
-        }
+        self.jump = False
 
     def on_update(self, delta_time: float):
         #Save Position
 
-        x, y = self.player.position
+        y = self.player.position[1]
 
         #Change Position
 
-        self.velX = self.speed * (self.movement["right"] - self.movement["left"])
-
-        if self.movement["jump"] and self.movement["onFloor"]:
+        if self.jump:
             self.velY = self.jumpForce
-            self.movement["onFloor"] = False
+            self.jump = False
 
         
 
         self.velY += self.gravity
 
     
-        x += self.velX * delta_time
+        # x += self.velX * delta_time
         y += self.velY
 
-        print(self.velY)
-
         # Check if it's inbounds
-
-        if x > self.width - self.player.width/2:
-            x = self.width - self.player.width/2  # Right side
-
-        elif x < 0 + self.player.width/2:
-            x = 0 + self.player.width/2  # Left side
-
-        if y > self.height - self.player.height/2:
-            y = self.height - self.player.height/2 # Top side
-
-        elif y < 0 + self.player.height/2 :
-            self.movement["onFloor"] = True
-            y = 0 + self.player.height/2 # Bottom side
+        if y < self.player.height/2 :
+            y = self.player.height/2 # Bottom side
 
         #Return Position
 
-        self.player.set_position(x, y)
+        self.player.set_position(self.width/2, y)
         
     def on_draw(self):
         arcade.start_render()
@@ -74,19 +54,11 @@ class MyGame(arcade.Window):
     
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == key.W or symbol == key.SPACE:
-            self.movement["jump"] = True
-        elif symbol == key.A:
-            self.movement["left"] = True
-        elif symbol == key.D:
-            self.movement["right"] = True
+            self.jump = True
 
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol == key.W or symbol == key.SPACE:
-            self.movement["jump"] = False
-        if symbol == key.A:
-            self.movement["left"] = False
-        if symbol == key.D:
-            self.movement["right"] = False
+            self.jump = False
 
 MyGame()
 
