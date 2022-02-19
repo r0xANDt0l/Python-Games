@@ -1,6 +1,6 @@
 import arcade
 from arcade import key
-from math import sqrt
+from random import uniform
 
 class MyGame(arcade.Window):
     def __init__(self, width = 800, height = 600, windowName = "Ventana") -> None:
@@ -10,7 +10,9 @@ class MyGame(arcade.Window):
         self.player = arcade.Sprite("Assets/player.png")
         self.player.set_position(self.width/2, self.height/2)
 
-        self.speed = 500
+        self.camPos = [0 , 0]
+
+        self.speed = 1
         self.gravity = -0.5
 
         self.velX = 0
@@ -18,6 +20,15 @@ class MyGame(arcade.Window):
         self.jumpForce = 10
 
         self.jump = False
+        self.pixelRatio = 100
+
+        self.coinAmt = 20
+        self.coins = [arcade.Sprite("Assets/coin.png", 0.5) for i in range(self.coinAmt)]
+
+        self.yRange = self.height / self.pixelRatio
+        self.xRange = self.width / self.pixelRatio
+        self.coinsPos = [(uniform(self.xRange/2 + 1, self.xRange * 2)  , uniform(-self.yRange/2, self.yRange)) for i in range(self.coinAmt)]
+
 
     def on_update(self, delta_time: float):
         #Save Position
@@ -35,7 +46,6 @@ class MyGame(arcade.Window):
         self.velY += self.gravity
 
     
-        # x += self.velX * delta_time
         y += self.velY
 
         # Check if it's inbounds
@@ -44,10 +54,16 @@ class MyGame(arcade.Window):
 
         #Return Position
 
+        self.camPos[0] += self.speed * delta_time
         self.player.set_position(self.width/2, y)
         
     def on_draw(self):
         arcade.start_render()
+        for i in range(self.coinAmt):
+            coinPixelPoint = (self.width/2 + (self.coinsPos[i][0] - self.camPos[0]) * self.pixelRatio, 
+                          self.height/2 + (self.coinsPos[i][1] - self.camPos[1]) * self.pixelRatio )
+            self.coins[i].position = coinPixelPoint 
+            self.coins[i].draw()
         self.player.draw()
         
 
