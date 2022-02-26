@@ -71,7 +71,6 @@ class bomberLuigi(arcade.Window):
         self.checkCol()
 
     def checkCol(self):
-        eraseQ = []
         for i in range(self.coinAmt):
             for o in range(self.ammo):
                 if self.bombs[o].collides_with_sprite(self.coins[i]):
@@ -80,8 +79,6 @@ class bomberLuigi(arcade.Window):
                     eraseQ.append(self.bombs[o])
                     
                     self.coinsPos[i] = pos   
-        for erase in eraseQ:
-            self.bombs.remove(erase) 
                  
     def on_draw(self):
         arcade.start_render()
