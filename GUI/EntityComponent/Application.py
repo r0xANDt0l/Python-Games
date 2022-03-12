@@ -1,20 +1,20 @@
 import arcade
-
 from EntityManager import EntityManager
 
-class App(arcade.Window):
-    def __init__(self, width: int = 800, height: int = 600, title: str = 'Arcade Window'):
-        super().__init__(width, height, title)
-        self.entityManager = EntityManager()
 
-    def update(self, delta_time: float):
+class Application(arcade.Window):
+    def __init__(self, width: int = 800, height: int = 600, title: str = 'Application'):
+        super().__init__(width, height, title)
+        self.entityManager = EntityManager(self)
+
+    def update(self, deltaTime: float):
         self.entityManager.update()
 
     def on_draw(self):
-        # Recuerda! El start_render siempre es lo primero.
+        # Esto siempre es lo primero
         arcade.start_render()
-        
-        self.entityManager.draw
+        # Todo lo otro después
+        self.entityManager.draw()
 
     def on_key_press(self, symbol: int, modifiers: int):
         pass

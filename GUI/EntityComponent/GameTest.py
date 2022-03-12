@@ -1,13 +1,21 @@
-from App import *
-from Components.SprRender import SpriteRenderer
-class gameTest(App):
+from Application import *
+from Components.Tests import Tests
+from Components.SpriteRenderer import SpriteRenderer
+from Components.ComponentPrint import ComponentPrint
+
+class GameTest(Application):
     def __init__(self):
-        super().__init__(800, 600, "GameTest")
+        super().__init__(800, 600, 'GameTest')
 
         player = self.entityManager.addEntity("Player")
-        player.addComp(componentPrint())
+        player.addComponent(SpriteRenderer("Assets/player.png"))
+        player.addComponent(Tests())
 
         self.run()
 
 
-gameTest()
+
+
+
+
+GameTest()

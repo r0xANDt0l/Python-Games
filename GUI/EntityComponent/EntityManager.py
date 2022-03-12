@@ -1,4 +1,4 @@
-from Entity import entity
+from Entity import Entity
 
 class EntityManager():
     def __init__(self, app) -> None:
@@ -13,9 +13,7 @@ class EntityManager():
         for entity in self.entities:
             entity.draw()
 
-    def addEntity(self, name : str = "entity") -> entity:
-        newEntity = entity(name)
-        self.entities.append(newEntity )
-
+    def addEntity(self, name:str = 'Entity') -> Entity:
+        newEntity = Entity(self,name)
+        self.entities.append(newEntity)
         return newEntity
-

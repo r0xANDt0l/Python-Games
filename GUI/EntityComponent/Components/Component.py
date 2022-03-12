@@ -1,5 +1,8 @@
-from Entity import entity
-class component():
+from Application import *
+from Entity import *
+import arcade
+
+class Component():
     def __init__(self, name: str = "Component") -> None:
         self.name = name
         self.entity = None
@@ -16,5 +19,11 @@ class component():
     def getName(self) -> str:
         return self.name
 
-    def setEntity(self, entity: entity):
+    def getEM(self) -> EntityManager:
+        return self.entity.entityManager
+
+    def getApp(self) -> Application:
+        return self.getEM().application
+
+    def setEntity(self, entity: Entity):
         self.entity = entity

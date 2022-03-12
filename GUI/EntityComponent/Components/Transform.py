@@ -1,27 +1,25 @@
-from Components.Components import *
-class transform():
+
+class Transform():
     def __init__(self) -> None:
         self.position = (0,0)
         self.rotation = 0
-        self.objScale = 1
-
+        self.localScale = 1
+    
     def translate(self, x : int = 0, y : int = 0):
-        X, Y = self.position
+        X,Y = self.position
+        self.position = (x + X, y + Y)
 
-        self.position = (x + X, y+ Y)
+    def setPosition(self, x : int, y : int):
+        self.position = (x , y )
 
-    def setPos(self, x : int, y : int):
-        self.position = (x, y)
+    def rotate(self, rot:float):
+        self.rotation += rot
 
+    def setRotation(self, rot:float):
+        self.rotation = rot
 
-    def rotate(self, rotate: float):
-        self.rotatation += rotate
+    def scale(self, s:float):
+        self.localScale *= s
 
-    def setRotation(self, rotate: float):
-        self.rotatation = rotate
-
-    def scale(self, scl:float):
-        self.objScale *= scl
-
-    def setScale(self, scl:float):
-        self.objScale = scl
+    def setScale(self, s:float):
+        self.localScale = s
