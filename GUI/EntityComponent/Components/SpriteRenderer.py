@@ -1,4 +1,5 @@
 from Components.Component import *
+from Components.BoxCollider import boxCollider
 
 class SpriteRenderer(Component):
     def __init__(self, path : str, scale : int = 1) -> None:
@@ -9,6 +10,7 @@ class SpriteRenderer(Component):
     def start(self):
         app = self.getApp()
         self.entity.transform.setPosition(app.width/2, app.height/2)
+        self.entity.addComponent(boxCollider(self.sprite.width, self.sprite.height))
 
     def update(self):
         tr = self.entity.transform

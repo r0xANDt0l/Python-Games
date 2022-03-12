@@ -22,8 +22,24 @@ class boxCollider(Collider):
         posThis = self.entity.transform.position[:]
 
         if other.name == "circleCollider":
-            pass
+            x = abs(posOther[0] - posThis[0])
+            y = abs(posOther[1] - posThis[1])
+
+            if x > (self.width/2 + other.rad) or y > (self.height/2 + other.rad):
+                return False
+
+            if x <= (self.width/2 + other.rad) or y <= (self.height/2 + other.rad):
+                return True
+
+
+            cornerDistance_sq = (x - self.width/2)^2 + (y - self.height/2)^2
+
+            return cornerDistance_sq <= (other.rad^2)
+
+
+
         elif other.name == "boxCollider":
-            pass
+            if  posThis[0] < posOther[0] + other.width and posThis[0] + self.width > posOther[0] and posThis[1] < posOther[1] + other.height and posThis[1] + self.height > posOther[1]:
+                return True
 
         return False

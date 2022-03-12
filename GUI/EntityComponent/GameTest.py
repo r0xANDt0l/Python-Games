@@ -11,6 +11,10 @@ class GameTest(Application):
         player.addComponent(SpriteRenderer("Assets/player.png", 0.5))
         player.addComponent(Tests())
 
+        other = self.entityManager.addEntity("other")
+        other.addComponent(SpriteRenderer("Assets/player.png", 0.5))
+        other.transform.setPosition(600, self.height/2)
+
         self.run()
 
 
