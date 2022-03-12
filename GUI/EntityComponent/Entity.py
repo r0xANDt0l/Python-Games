@@ -5,6 +5,7 @@ class Entity():
         self.name = name
         self.transform = Transform()
         self.components = []
+        self.componentsD = {}
         self.entityManager = entityManager
 
     def update(self):
@@ -17,5 +18,12 @@ class Entity():
 
     def addComponent(self, component):
         self.components.append(component)
+        self.componentsD[component.name] = component
         component.setEntity(self)
         component.start()
+
+    def getComponent(self, cName):
+        if cName in self.componentsD:
+            return self.componentsD[cName]
+        else:
+            return None

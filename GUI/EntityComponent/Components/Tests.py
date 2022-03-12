@@ -5,4 +5,5 @@ class Tests(Component):
         super().__init__('Tests')
 
     def update(self):
-        self.entity.transform.scale(1.0001)
+        if self.getInputManager().getKey(keyCode.SPACE):
+            self.entity.transform.scale(1.01)

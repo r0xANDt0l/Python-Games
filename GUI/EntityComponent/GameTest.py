@@ -8,7 +8,7 @@ class GameTest(Application):
         super().__init__(800, 600, 'GameTest')
 
         player = self.entityManager.addEntity("Player")
-        player.addComponent(SpriteRenderer("Assets/player.png"))
+        player.addComponent(SpriteRenderer("Assets/player.png", 0.5))
         player.addComponent(Tests())
 
         self.run()
