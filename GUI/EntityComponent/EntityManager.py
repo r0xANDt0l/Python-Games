@@ -13,6 +13,7 @@ class EntityManager():
     def checkCollisions(self):
         pass
 
+
     def draw(self):
         for entity in self.entities:
             entity.draw()

@@ -1,13 +1,13 @@
 import arcade
 from EntityManager import EntityManager
-from inputManager import *
+from InputManager import *
 
 
 class Application(arcade.Window):
     def __init__(self, width: int = 800, height: int = 600, title: str = 'Application'):
         super().__init__(width, height, title)
         self.entityManager = EntityManager(self)
-        self.inputManager = inputManager()
+        self.inputManager = InputManager()
 
     def update(self, deltaTime: float):
         self.entityManager.update()
@@ -19,10 +19,10 @@ class Application(arcade.Window):
         self.entityManager.draw()
 
     def on_key_press(self, symbol: int, modifiers: int):
-        self.inputManager.keyDown(symbol)
+        self.inputManager.keyPressed(symbol)
 
     def on_key_release(self, symbol: int, modifiers: int):
-        self.inputManager.keyUp(symbol)
+        self.inputManager.keyReleased(symbol)
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
         pass

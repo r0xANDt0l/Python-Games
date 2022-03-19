@@ -1,16 +1,17 @@
-from arcade import key as keyCode
+from arcade import key as KeyCode
 
-class inputManager():
+
+class InputManager():
     def __init__(self) -> None:
         self.keys = {}
-        
-    def keyDown(self, key : keyCode):
+
+    def keyPressed(self, key: KeyCode):
         self.keys[key] = True
 
-    def keyUp(self, key : keyCode):
+    def keyReleased(self, key : KeyCode):
         self.keys[key] = False
 
-    def getKey(self, key : keyCode):
+    def getKey(self, key : KeyCode):
         if key in self.keys:
             return self.keys[key]
         return False

@@ -17,20 +17,20 @@ class Component():
     def draw(self):
         pass
 
-    def getName(self) -> str:
+    def getName(self)-> str:
         return self.name
 
-    def getEM(self) -> EntityManager:
+    def getEntityManager(self) -> EntityManager:
         return self.entity.entityManager
 
-    def getApp(self) -> Application:
-        return self.getEM().application
+    def getApplication(self) -> Application:
+        return self.getEntityManager().application
 
-    def getComponent(self, cName: str) -> Component:
-        return self.entity.getComponent(cName)
-
-    def getInputManager(self) -> inputManager:
-        return self.getApp().inputManager
+    def getInputManager(self) -> InputManager:
+        return self.getApplication().inputManager
 
     def setEntity(self, entity: Entity):
         self.entity = entity
+
+    def getComponent(self, cName: str) -> Component:
+        return self.entity.getComponent(cName)

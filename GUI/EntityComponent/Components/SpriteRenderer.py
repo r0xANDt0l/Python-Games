@@ -1,5 +1,5 @@
+from Components.BoxCollider import BoxCollider
 from Components.Component import *
-from Components.BoxCollider import boxCollider
 
 class SpriteRenderer(Component):
     def __init__(self, path : str, scale : int = 1) -> None:
@@ -8,9 +8,9 @@ class SpriteRenderer(Component):
         self.sprite = arcade.Sprite(path, scale)
 
     def start(self):
-        app = self.getApp()
+        app = self.getApplication()
         self.entity.transform.setPosition(app.width/2, app.height/2)
-        self.entity.addComponent(boxCollider(self.sprite.width, self.sprite.height))
+        self.entity.addComponent(BoxCollider(self.sprite.width, self.sprite.height))
 
     def update(self):
         tr = self.entity.transform

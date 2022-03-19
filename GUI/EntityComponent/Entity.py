@@ -25,5 +25,4 @@ class Entity():
     def getComponent(self, cName):
         if cName in self.componentsD:
             return self.componentsD[cName]
-        else:
-            return None
+        return None
