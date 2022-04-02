@@ -1,4 +1,5 @@
 from Engine.Application import *
+from Games.GameTest.Components.CoinManager import CoinManager
 from Games.GameTest.Components.InfiniteScreen import InfiniteScreen
 from Games.GameTest.Components.MovementDrag import MovementDrag
 from Games.GameTest.Components.Pruebas import Pruebas
@@ -15,7 +16,7 @@ class GameTest(Application):
         player.addComponent(InfiniteScreen())           
 
         coinManager = self.entityManager.addEntity("CoinManager")
-        coinManager.   
+        coinManager.addComponent(CoinManager())
 
 
         self.run()
