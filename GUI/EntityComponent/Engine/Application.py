@@ -8,8 +8,10 @@ class Application(arcade.Window):
         super().__init__(width, height, title)
         self.entityManager = EntityManager(self)
         self.inputManager = InputManager()
+        self.deltaTime = 0
 
     def update(self, deltaTime: float):
+        self.deltaTime = deltaTime
         self.entityManager.firstUpdate()
         self.entityManager.update()
         self.entityManager.lateUpdate()

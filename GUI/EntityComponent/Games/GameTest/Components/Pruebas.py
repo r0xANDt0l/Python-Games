@@ -5,8 +5,6 @@ class Pruebas(Component):
         super().__init__('Pruebas')
 
     def update(self):
-        if self.getInputManager().getKeyDown(KeyCode.SPACE):
-            self.entity.transform.scale(2)
         if self.getInputManager().getKeyDown(KeyCode.C):
             self.entity.transform.scale(0.5)
         if self.getInputManager().getKey(KeyCode.D):

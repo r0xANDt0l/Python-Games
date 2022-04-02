@@ -12,7 +12,7 @@ class SpriteRenderer(Component):
         app = self.getApplication()
         self.entity.transform.setPosition(app.width/2, app.height/2)
         if self.autoCollider:
-            self.entity.addComponent(BoxCollider(self.sprite.width, self.sprite.height, True))
+            self.entity.addComponent(BoxCollider(self.sprite.width, self.sprite.height, False))
 
     def update(self):
         tr = self.entity.transform

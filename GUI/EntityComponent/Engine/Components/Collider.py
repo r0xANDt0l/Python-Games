@@ -39,4 +39,5 @@ class Collider(Component):
     def draw(self):
         if self.debug:
             self.debugSprite.position = self.entity.transform.position
+            self.debugSprite.angle = self.entity.transform.rotation
             self.debugSprite.draw()

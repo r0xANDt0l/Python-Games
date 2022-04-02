@@ -1,4 +1,3 @@
-from msilib.schema import tables
 import arcade
 from arcade import key
 from math import radians, cos, sin
