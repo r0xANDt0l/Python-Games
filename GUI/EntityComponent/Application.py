@@ -11,6 +11,7 @@ class Application(arcade.Window):
 
     def update(self, deltaTime: float):
         self.entityManager.update()
+        self.inputManager.clearKeys()
 
     def on_draw(self):
         # Esto siempre es lo primero

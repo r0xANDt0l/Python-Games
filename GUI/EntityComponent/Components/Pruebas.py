@@ -6,4 +6,7 @@ class Pruebas(Component):
 
     def update(self):
         if self.getInputManager().getKey(KeyCode.SPACE):
-            self.entity.transform.translate(1, 0)
+            self.entity.transform.translate(1,0)
+
+    def onCollision(self, other: Entity):
+        print("Yo:", self.entity.name, "Me he chocado con", other.name)

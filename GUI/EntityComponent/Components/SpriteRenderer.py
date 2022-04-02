@@ -1,16 +1,19 @@
+from enum import auto
 from Components.BoxCollider import BoxCollider
 from Components.Component import *
 
 class SpriteRenderer(Component):
-    def __init__(self, path : str, scale : int = 1) -> None:
+    def __init__(self, path : str, scale : int = 1, autoCollider = True) -> None:
         super().__init__('SpriteRenderer')
         self.localScale = scale
         self.sprite = arcade.Sprite(path, scale)
+        self.autoCollider = autoCollider
 
     def start(self):
         app = self.getApplication()
         self.entity.transform.setPosition(app.width/2, app.height/2)
-        self.entity.addComponent(BoxCollider(self.sprite.width, self.sprite.height))
+        if self.autoCollider:
+            self.entity.addComponent(BoxCollider(self.sprite.width, self.sprite.height, True))
 
     def update(self):
         tr = self.entity.transform

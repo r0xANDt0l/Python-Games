@@ -1,4 +1,4 @@
-from Entity import Entity
+from Entity import *
 
 class EntityManager():
     def __init__(self, app) -> None:
@@ -11,7 +11,16 @@ class EntityManager():
         self.checkCollisions()
 
     def checkCollisions(self):
-        pass
+        for entity in self.entities:
+            eColl = entity.collider
+            if eColl == None:
+                continue
+            for other in self.entities:
+                otherColl = other.collider
+                if otherColl == None or other == entity:
+                    continue
+                if eColl.checkCollision(otherColl):
+                    entity.onCollision(other)
 
 
     def draw(self):

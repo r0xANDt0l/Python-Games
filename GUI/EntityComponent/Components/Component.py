@@ -34,3 +34,6 @@ class Component():
 
     def getComponent(self, cName: str) -> Component:
         return self.entity.getComponent(cName)
+
+    def onCollision(self, other: Entity):
+        pass

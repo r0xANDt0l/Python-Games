@@ -4,17 +4,31 @@ from Components.Component import *
 
 
 class BoxCollider(Collider):
-    def __init__(self, width: int = 50, height: int = 50) -> None:
-        super().__init__("BoxCollider")
+    def __init__(self, width: int = 50, height: int = 50, debug = False) -> None:
+        super().__init__("BoxCollider", debug)
         self.width = width
         self.height = height
         self.originalWidth = width
         self.originalHeight = height
+        self.debugSprite = arcade.Sprite("Assets/Collider.png")
 
     def update(self):
         s = self.entity.transform.localScale
         self.width = self.originalWidth * s
         self.height = self.originalHeight * s
+
+        if self.debug:
+            self.debugSprite.width = self.width
+            self.debugSprite.height = self.height
+
+    def draw(self):
+        super().draw()
+        if self.debug:
+            x, y = self.entity.transform.position
+            arcade.draw_circle_filled(x + self.width/2, y, self.width * 0.05, arcade.color.GREEN)
+            arcade.draw_circle_filled(x - self.width/2, y, self.width * 0.05, arcade.color.GREEN)
+            arcade.draw_circle_filled(x,  y + self.height/2, self.width * 0.05, arcade.color.GREEN)
+            arcade.draw_circle_filled(x,  y - self.height/2, self.width * 0.05, arcade.color.GREEN)
 
     def checkCollision(self, other: Collider) -> bool:
 
