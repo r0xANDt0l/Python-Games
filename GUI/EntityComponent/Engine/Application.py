@@ -1,6 +1,6 @@
 import arcade
-from EntityManager import EntityManager
-from InputManager import *
+from Engine.EntityManager import EntityManager
+from Engine.InputManager import *
 
 
 class Application(arcade.Window):
@@ -10,7 +10,9 @@ class Application(arcade.Window):
         self.inputManager = InputManager()
 
     def update(self, deltaTime: float):
+        self.entityManager.firstUpdate()
         self.entityManager.update()
+        self.entityManager.lateUpdate()
         self.inputManager.clearKeys()
 
     def on_draw(self):

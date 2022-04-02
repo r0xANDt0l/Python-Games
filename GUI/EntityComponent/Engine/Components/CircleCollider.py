@@ -1,10 +1,10 @@
 from math import sqrt
-from Components.Collider import Collider
-from Components.Component import *
+from Engine.Components.Collider import Collider
+from Engine.Components.Component import *
 
 class CircleCollider(Collider):
-    def __init__(self, rad: int = 50) -> None:
-        super().__init__("CircleCollider")
+    def __init__(self, rad: int = 50, debug = False) -> None:
+        super().__init__("CircleCollider", debug)
         self.rad = rad
         self.originalRad = rad
 

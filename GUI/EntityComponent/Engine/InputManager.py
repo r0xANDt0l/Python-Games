@@ -30,6 +30,7 @@ class InputManager():
             return self.keysUp[key]
         return False
 
+
     def clearKeys(self):
         self.keysDown.clear()
         self.keysUp.clear()

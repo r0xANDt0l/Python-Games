@@ -1,6 +1,6 @@
 from math import sqrt
-from Components.Collider import Collider
-from Components.Component import *
+from Engine.Components.Collider import Collider
+from Engine.Components.Component import *
 
 
 class BoxCollider(Collider):
@@ -10,7 +10,7 @@ class BoxCollider(Collider):
         self.height = height
         self.originalWidth = width
         self.originalHeight = height
-        self.debugSprite = arcade.Sprite("Assets/Collider.png")
+        self.debugSprite = arcade.Sprite("Engine/Assets/Collider.png")
 
     def update(self):
         s = self.entity.transform.localScale
@@ -24,11 +24,12 @@ class BoxCollider(Collider):
     def draw(self):
         super().draw()
         if self.debug:
-            x, y = self.entity.transform.position
+            x,y = self.entity.transform.position
             arcade.draw_circle_filled(x + self.width/2, y, self.width * 0.05, arcade.color.GREEN)
             arcade.draw_circle_filled(x - self.width/2, y, self.width * 0.05, arcade.color.GREEN)
-            arcade.draw_circle_filled(x,  y + self.height/2, self.width * 0.05, arcade.color.GREEN)
-            arcade.draw_circle_filled(x,  y - self.height/2, self.width * 0.05, arcade.color.GREEN)
+            arcade.draw_circle_filled(x , y + self.height/2, self.width * 0.05, arcade.color.GREEN)
+            arcade.draw_circle_filled(x , y - self.height/2, self.width * 0.05, arcade.color.GREEN)
+
 
     def checkCollision(self, other: Collider) -> bool:
 
@@ -50,6 +51,14 @@ class BoxCollider(Collider):
             return cornerDistance_sq <= (other.rad**2)
 
         elif other.name == "BoxCollider":
-            if posThis[0] < posOther[0] + other.width and posThis[0] + self.width > posOther[0] and posThis[1] < posOther[1] + other.height and posThis[1] + self.height > posOther[1]:
-                return True
+            # collision x-axis?
+            width = self.width/2 + other.width/2
+            height = self.height/2 + other.height/2
+
+            collisionX = posThis[0] + width >= posOther[0] and posOther[0] + width >= posThis[0]
+            # collision y-axis?
+            collisionY = posThis[1] + height >= posOther[1] and posOther[1] + height >= posThis[1]
+            # collision only if on both axes
+            return collisionX and collisionY
+
         return False

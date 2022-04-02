@@ -1,20 +1,36 @@
 from __future__ import annotations
 import arcade
-from Entity import *
-from Application import *
+from Engine.Entity import *
+from Engine.Application import *
 
 class Component():
     def __init__(self, name: str = "Component") -> None:
         self.name = name
         self.entity = None
+        self.enabled = True
 
     def start(self):
+        pass
+
+    def firstUpdate(self):
         pass
 
     def update(self):
         pass
 
+    def lateUpdate(self):
+        pass
+
     def draw(self):
+        pass
+
+    def onCollision(self, other: Entity):
+        pass
+
+    def onCollisionEnter(self, other: Entity):
+        pass
+
+    def onCollisionExit(self, other: Entity):
         pass
 
     def getName(self)-> str:
@@ -34,6 +50,3 @@ class Component():
 
     def getComponent(self, cName: str) -> Component:
         return self.entity.getComponent(cName)
-
-    def onCollision(self, other: Entity):
-        pass

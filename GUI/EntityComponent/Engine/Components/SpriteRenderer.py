@@ -1,6 +1,5 @@
-from enum import auto
-from Components.BoxCollider import BoxCollider
-from Components.Component import *
+from Engine.Components.BoxCollider import BoxCollider
+from Engine.Components.Component import *
 
 class SpriteRenderer(Component):
     def __init__(self, path : str, scale : int = 1, autoCollider = True) -> None:
