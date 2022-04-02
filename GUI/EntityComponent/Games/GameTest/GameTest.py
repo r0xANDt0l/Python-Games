@@ -1,4 +1,4 @@
-from Engine.Application import *
+from GUI.EntityComponent.Engine.Application import *
 from Games.GameTest.Components.Pruebas import Pruebas
 from Games.GameTest.Components.Pruebas2 import Pruebas2
 from Engine.Components.SpriteRenderer import SpriteRenderer
