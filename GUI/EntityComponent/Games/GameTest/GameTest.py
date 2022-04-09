@@ -1,4 +1,5 @@
 from Engine.Application import *
+from Games.GameTest.Components.CoinDetector import CoinDetector
 from Games.GameTest.Components.CoinManager import CoinManager
 from Games.GameTest.Components.InfiniteScreen import InfiniteScreen
 from Games.GameTest.Components.MovementDrag import MovementDrag
@@ -13,7 +14,8 @@ class GameTest(Application):
         player = self.entityManager.addEntity("Player")
         player.addComponent(SpriteRenderer("GUI/EntityComponent/Games/GameTest/Assets/player_front.png"))
         player.addComponent(MovementDrag())
-        player.addComponent(InfiniteScreen())           
+        player.addComponent(InfiniteScreen())
+        player.addComponent(CoinDetector())           
 
         coinManager = self.entityManager.addEntity("CoinManager")
         coinManager.addComponent(CoinManager())

@@ -2,8 +2,9 @@ from random import randint
 from Engine.Components.Component import *
 
 class Coin(Component):
-    def __init__(self) -> None:
+    def __init__(self, coinManager) -> None:
         super().__init__("Coin")
+        self.coinManager = coinManager
 
     def start(self):
         self.tr = self.entity.transform
@@ -17,4 +18,4 @@ class Coin(Component):
         self.tr.setPosition(x,y)
 
     def collect(self):
-        pass
+        self.coinManager.collectCoin(self.entity)
