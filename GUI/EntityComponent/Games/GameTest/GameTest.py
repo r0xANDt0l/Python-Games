@@ -9,7 +9,7 @@ from Engine.Components.SpriteRenderer import SpriteRenderer
 
 class GameTest(Application):
     def __init__(self):
-        super().__init__(800, 600, 'GameTest')
+        super().__init__(800, 600, 'GameTest', arcade.color.BABY_BLUE)
 
         player = self.entityManager.addEntity("Player")
         player.addComponent(SpriteRenderer("GUI/EntityComponent/Games/GameTest/Assets/player_front.png"))

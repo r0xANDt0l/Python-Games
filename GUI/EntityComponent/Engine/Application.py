@@ -4,11 +4,12 @@ from Engine.InputManager import *
 
 
 class Application(arcade.Window):
-    def __init__(self, width: int = 800, height: int = 600, title: str = 'Application'):
+    def __init__(self, width: int = 800, height: int = 600, title: str = 'Application', color:str = arcade.color.BLACK):
         super().__init__(width, height, title)
         self.entityManager = EntityManager(self)
         self.inputManager = InputManager()
         self.deltaTime = 0
+        arcade.set_background_color(color)
 
     def update(self, deltaTime: float):
         self.deltaTime = deltaTime
