@@ -5,21 +5,23 @@ class EntityManager():
         self.entities = []
         self.entitiesEraser = []
         self.application = app
+        self.active = False
         
     def firstUpdate(self):
         for entity in self.entities:
-            if entity.active:
+            if entity.active and self.active:
                 entity.firstUpdate()
 
     def update(self):
         for entity in self.entities:
-            if entity.active:
+            if entity.active and self.active:
                 entity.update()
-        self.checkCollisions()
+        if self.active:
+            self.checkCollisions()
 
     def lateUpdate(self):
         for entity in self.entities:
-            if entity.active:
+            if entity.active and self.active:
                 entity.lateUpdate()
 
         for erase in self.entitiesEraser:
@@ -29,7 +31,7 @@ class EntityManager():
 
     def draw(self):
         for entity in self.entities:
-            if entity.active:
+            if entity.active and self.active:
                 entity.draw()
 
     def checkCollisions(self):

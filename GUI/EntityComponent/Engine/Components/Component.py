@@ -45,6 +45,9 @@ class Component():
     def getInputManager(self) -> InputManager:
         return self.getApplication().inputManager
 
+    def getSceneManager(self) -> InputManager:
+        return self.getApplication().sceneManager
+
     def setEntity(self, entity: Entity):
         self.entity = entity
 

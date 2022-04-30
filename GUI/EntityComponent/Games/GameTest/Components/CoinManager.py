@@ -2,6 +2,7 @@ from xmlrpc.client import MAXINT
 from Engine.Components.Component import *
 from Engine.Components.SpriteRenderer import SpriteRenderer
 from Engine.Components.Stopwatch import StopWatch
+from GUI.EntityComponent.Engine.Components.AudioSource import AudioSource
 from Games.GameTest.Components.Coin import Coin
 
 class CoinManager(Component):
@@ -16,6 +17,7 @@ class CoinManager(Component):
         self.coins = [self.getEntityManager().addEntity("Coin"+ str(i)) for i in range(self.numCoins)]
         for coin in self.coins:
             coin.addComponent(SpriteRenderer("GUI/EntityComponent/Games/GameTest/Assets/gold_1.png", 0.5))
+            coin.addComponent(AudioSource("GUI/EntityComponent/Games/GameTest/Assets/gold_1.png", 50))
             coin.addComponent(Coin(self))
         self.reset_game()
 

@@ -11,6 +11,10 @@ class InfiniteScreen(Component):
         self.height = self.getApplication().height
 
     def update(self):
+        if self.getInputManager().getKeyDown(KeyCode.ESCAPE):
+            self.getSceneManager().pushScene(1)
+
+
         x, y = self.tr.position
 
         if x > self.width + self.sprite.width/2: # Right side

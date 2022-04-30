@@ -1,9 +1,13 @@
 from Engine.EntityManager import *
 
-class scene():
-    def __init__(self, name : str) -> None:
+class Scene():
+    def __init__(self , app , name : str) -> None:
         self.name = name
-        self.entityManager = EntityManager()
+        self.entityManager = EntityManager(app)
 
-    def start():
-        pass
+    def start(self):
+        self.entityManager.entities = []
+        self.entityManager.active = True
+
+    def close(self):
+        self.entityManager.active = False

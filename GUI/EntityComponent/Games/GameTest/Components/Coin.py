@@ -8,6 +8,7 @@ class Coin(Component):
 
     def start(self):
         self.tr = self.entity.transform
+        self.audio = self.getComponent("AudioSource")
         self.sprite = self.getComponent("SpriteRenderer").sprite
         self.width = self.getApplication().width
         self.height = self.getApplication().height
@@ -18,4 +19,7 @@ class Coin(Component):
         self.tr.setPosition(x,y)
 
     def collect(self):
+        self.audio.play()
         self.coinManager.collectCoin(self.entity)
+
+        
