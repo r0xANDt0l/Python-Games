@@ -3,8 +3,6 @@ from Games.GameTest.Components.CoinDetector import CoinDetector
 from Games.GameTest.Components.CoinManager import CoinManager
 from Games.GameTest.Components.InfiniteScreen import InfiniteScreen
 from Games.GameTest.Components.MovementDrag import MovementDrag
-from Games.GameTest.Components.Pruebas import Pruebas
-from Games.GameTest.Components.Pruebas2 import Pruebas2
 from Engine.Components.SpriteRenderer import SpriteRenderer
 
 class GameTest(Application):

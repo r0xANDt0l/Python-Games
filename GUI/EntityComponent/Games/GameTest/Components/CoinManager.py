@@ -34,7 +34,7 @@ class CoinManager(Component):
 
     def draw(self):
         arcade.draw_text(str(round(self.crono.currentTime(),2)) ,self.getApplication().width/2,self.getApplication().height * 0.95, arcade.color.WHITE, anchor_x="center")
-        arcade.draw_text("Min: " + str(round(self.bestTime,2)) ,self.getApplication().width/2,self.getApplication().height * 0.85, arcade.color.WHITE, anchor_x="center")
+        arcade.draw_text( "Min:" + str(round(self.bestTime,2))if self.bestTime != MAXINT else "Na", self.getApplication().width/2, self.getApplication().height* 0.9, arcade.color.WHITE, 20, anchor_x="center")
 
     def collectCoin(self, coin: Entity):
         if not coin.active:
