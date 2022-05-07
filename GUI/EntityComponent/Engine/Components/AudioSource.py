@@ -1,29 +1,33 @@
 from Engine.Components.Component import *
 
 class AudioSource(Component):
-    def __init__(self, path: str, volume : int = 50, loop : bool = 0) -> None:
+    def __init__(self, path : str, volume = 1, loop = False) -> None:
         super().__init__("AudioSource")
         self.audio = arcade.Sound(path)
-        self.set_volume(volume)
+        self.volume = volume
+        self.loop = loop
 
-    def audio_length(self):
-        return self.audio.get_length()
+    def play(self):
+        self.audio.play(self.volume,loop=self.loop)
 
-    def get_length(self):
-        return self.audio.get_length()
-
-    def get_volume(self):
-        return self.audio.get_volume() * 100
-    
-    def set_volume(self, volume : int):
-        floatvolume = volume / 100
-        self.audio.set_volume(floatvolume)
-    
-    def is_playing(self):
-        return self.audio.is_playing()
-
-    def is_complete(self):
+    def complete(self) -> bool:
         return self.audio.is_complete()
 
-    def play(self, location : int = 0 , loop : bool = False):
-        self.audio.play(self.get_volume(), location, loop)
+    def playing(self) -> bool:
+        return self.audio.is_playing()  
+
+    def setLoop(self, loop:bool):
+        self.loop = loop
+
+    def setVolume(self, volume :float):
+        self.volume = volume
+        if self.playing():
+            self.audio.set_volume(volume)
+            
+    def stop(self):
+        if self.playing():
+            self.audio.stop()
+
+    def createAndPlay(path : str, volume = 1, loop = False):
+        newSound = arcade.Sound(path)
+        newSound.play(volume,0,loop )
