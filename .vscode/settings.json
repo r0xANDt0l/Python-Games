@@ -1,4 +1,5 @@
 {
     "files.autoSave": "afterDelay",
-    "smoothtype.autoReload": true
+    "smoothtype.autoReload": true,
+    "editor.fontFamily": "Hack, 'Courier New', monospace"
 }
